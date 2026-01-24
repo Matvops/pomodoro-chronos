@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.cycles {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: .8rem;
+}
+
+.cycle {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+.work {
+    background-color: var(--warning);
+}
+
+.shortRest {
+    background-color: var(--success);
+}
+
+.short {
+    background-color: var(--info);
+}
+
