@@ -5,6 +5,7 @@ import { Menu } from "./components/Menu";
 import "./styles/theme.css";
 import "./styles/global.css";
 import { CountDown } from "./components/CountDown";
+import { FormHome } from "./components/FormHome";
 
 export function App() {
 
@@ -22,6 +23,9 @@ export function App() {
         <CountDown />
       </Container>
 
+      <Container>
+        <FormHome />
+      </Container>
     </>
   )
 
