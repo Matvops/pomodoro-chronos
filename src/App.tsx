@@ -6,6 +6,7 @@ import "./styles/theme.css";
 import "./styles/global.css";
 import { CountDown } from "./components/CountDown";
 import { FormHome } from "./components/FormHome";
+import { Footer } from "./components/Footer";
 
 export function App() {
 
@@ -25,6 +26,10 @@ export function App() {
 
       <Container>
         <FormHome />
+      </Container>
+
+      <Container>
+        <Footer />
       </Container>
     </>
   )
