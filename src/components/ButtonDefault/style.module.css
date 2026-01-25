@@ -12,7 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 3.2rem 0;
+    margin-top: 3.2rem;
 }
 
 .button:hover {
