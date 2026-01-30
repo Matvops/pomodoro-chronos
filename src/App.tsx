@@ -23,10 +23,7 @@ export function App() {
 
   return (
     <>
-      <Home
-        state={state}
-        setState={setState}
-      />
+      <Home/>
     </>
   )
 
