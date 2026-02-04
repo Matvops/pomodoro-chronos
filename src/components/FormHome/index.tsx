@@ -3,11 +3,12 @@ import { ButtonDefault } from '../ButtonDefault';
 import { Cycles } from '../Cycles';
 import { InputDefault } from '../InputDefault';
 import style from './style.module.css';
-import type { FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 
 
 export function FormHome() {
 
+  const [taskName, setTaskName] = useState('');
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -21,6 +22,8 @@ export function FormHome() {
           type='text'
           id='task'
           placeholder='Digite algo...'
+          value={taskName}
+          onChange={e => setTaskName(e.target.value)}
         />
       </div>
 
