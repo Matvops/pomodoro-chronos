@@ -3,15 +3,50 @@ import { ButtonDefault } from '../ButtonDefault';
 import { Cycles } from '../Cycles';
 import { InputDefault } from '../InputDefault';
 import style from './style.module.css';
-import { useState, type FormEvent } from 'react';
+import { useContext, useState, type FormEvent } from 'react';
+import type { TaskModel } from '../../models/TaskModel';
+import { TaskContext } from '../../contexts/TaskContext';
 
 
 export function FormHome() {
 
   const [taskName, setTaskName] = useState('');
+  const { task, setTask } = useContext(TaskContext);
+
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    
+    if(!taskName) return;
+
+    const taskNameClean = taskName.trim();
+
+    if(!taskNameClean) {
+      alert('Digite a task')
+      return;
+    }
+
+    const newTask: TaskModel = {
+      id: Date.now().toString(),
+      name: taskName,
+      startDate: Date.now(),
+      completeDate: null,
+      interruptDate: null,
+      durationInMinutes: 1,
+      type: 'work'
+    };
+
+    setTask(prevState => {
+      return {
+        ...prevState,
+        activeTask: newTask,
+        currentCycle: 1,
+        secondsRemaining: newTask.durationInMinutes * 60,
+        formattedSecondsRemaining: '00:00',
+        tasks: [...prevState.tasks, newTask],
+        config: {...prevState.config}
+      }
+    });
   }
 
   return (
