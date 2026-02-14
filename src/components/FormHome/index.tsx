@@ -6,17 +6,19 @@ import style from './style.module.css';
 import { useContext, useState, type FormEvent } from 'react';
 import type { TaskModel } from '../../models/TaskModel';
 import { TaskContext } from '../../contexts/TaskContext';
+import { getNextCycle } from '../../utils/getNextCycle';
 
 
 export function FormHome() {
 
   const [taskName, setTaskName] = useState('');
   const { task, setTask } = useContext(TaskContext);
-
+  
+  const nextCycle = getNextCycle(task.currentCycle);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    
+
     if(!taskName) return;
 
     const taskNameClean = taskName.trim();
@@ -39,8 +41,8 @@ export function FormHome() {
     setTask(prevState => {
       return {
         ...prevState,
-        activeTask: newTask,
-        currentCycle: 1,
+        activeTask: newTask,  
+        currentCycle: nextCycle,
         secondsRemaining: newTask.durationInMinutes * 60,
         formattedSecondsRemaining: '00:00',
         tasks: [...prevState.tasks, newTask],
