@@ -7,6 +7,7 @@ import { useContext, useState, type FormEvent } from 'react';
 import type { TaskModel } from '../../models/TaskModel';
 import { TaskContext } from '../../contexts/TaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
+import { getNextCycleType } from '../../utils/getNextCycleType';
 
 
 export function FormHome() {
@@ -15,6 +16,7 @@ export function FormHome() {
   const { task, setTask } = useContext(TaskContext);
   
   const nextCycle = getNextCycle(task.currentCycle);
+  const nextCycleType = getNextCycleType(nextCycle);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -35,7 +37,7 @@ export function FormHome() {
       completeDate: null,
       interruptDate: null,
       durationInMinutes: 1,
-      type: 'work'
+      type: nextCycleType
     };
 
     setTask(prevState => {
