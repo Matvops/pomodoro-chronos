@@ -36,7 +36,7 @@ export function FormHome() {
       startDate: Date.now(),
       completeDate: null,
       interruptDate: null,
-      durationInMinutes: 1,
+      durationInMinutes: task.config[nextCycleType],
       type: nextCycleType
     };
 
