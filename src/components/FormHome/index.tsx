@@ -71,9 +71,11 @@ export function FormHome() {
         <p>Próximo intervalo é de {task.config[nextCycleType]} minutos</p>
       </div>
 
-      <div className={style.formRow}>
-        <Cycles />
-      </div>
+      {task.currentCycle > 0 && (
+        <div className={style.formRow}>
+          <Cycles />
+        </div>
+      )}
 
       <div className={style.formRow}>
         <ButtonDefault color='green' >
