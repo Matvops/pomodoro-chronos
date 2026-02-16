@@ -67,7 +67,7 @@ export function FormHome() {
       </div>
 
       <div className={style.formRow}>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <p>Próximo intervalo é de {task.config[nextCycleType]} minutos</p>
       </div>
 
       <div className={style.formRow}>
