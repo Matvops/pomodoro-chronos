@@ -88,6 +88,7 @@ export function FormHome() {
           value={taskName}
           onChange={e => setTaskName(e.target.value)}
           disabled={!!task.activeTask}
+          autoComplete='off'
         />
       </div>
 
