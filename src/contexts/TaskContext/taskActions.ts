@@ -1,4 +1,4 @@
-import type { TaskModelState } from "../../models/TaskModelState"
+import type { TaskModel } from "../../models/TaskModel"
 
 export enum TaskActionTypes {
     START_TASK = 'START_TASK',
@@ -9,10 +9,10 @@ export enum TaskActionTypes {
 
 export type TaskActionType = {
     type: TaskActionTypes.START_TASK,
-    payload: TaskModelState
+    payload: TaskModel
 } | {
     type: TaskActionTypes.INTERRUPT_TASK,
-    payload: TaskModelState
+    payload: TaskModel
 } | {
     type: TaskActionTypes.RESET
 }
