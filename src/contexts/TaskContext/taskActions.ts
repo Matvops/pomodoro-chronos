@@ -2,8 +2,7 @@ import type { TaskModel } from "../../models/TaskModel"
 
 export enum TaskActionTypes {
     START_TASK = 'START_TASK',
-    INTERRUPT_TASK = 'INTERRUPT_TASK',
-    RESET = 'RESET'
+    INTERRUPT_TASK = 'INTERRUPT_TASK'
 };
 
 
@@ -12,7 +11,4 @@ export type TaskActionType = {
     payload: TaskModel
 } | {
     type: TaskActionTypes.INTERRUPT_TASK,
-    payload: TaskModel
-} | {
-    type: TaskActionTypes.RESET
 }
