@@ -8,25 +8,26 @@ import type { TaskModel } from '../../models/TaskModel';
 import { TaskContext } from '../../contexts/TaskContext';
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
-import { parseSecondsToMinutes } from '../../utils/parseSecondsToMinutes';
+import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
+import { TipsForCycles } from '../TipsForCycles';
 
 
 export function FormHome() {
 
   const [taskName, setTaskName] = useState('');
-  const { task, setTask } = useContext(TaskContext);
-  
+  const { task, dispatch } = useContext(TaskContext);
+
   const nextCycle = getNextCycle(task.currentCycle);
   const nextCycleType = getNextCycleType(nextCycle);
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
-    if(!taskName) return;
+    if (!taskName) return;
 
     const taskNameClean = taskName.trim();
 
-    if(!taskNameClean) {
+    if (!taskNameClean) {
       alert('Digite a task')
       return;
     }
@@ -41,40 +42,14 @@ export function FormHome() {
       type: nextCycleType
     };
 
-    setTask(prevState => {
-      return {
-        ...prevState,
-        activeTask: newTask,  
-        currentCycle: nextCycle,
-        secondsRemaining: newTask.durationInMinutes * 60,
-        formattedSecondsRemaining: parseSecondsToMinutes(newTask.durationInMinutes * 60),
-        tasks: [...prevState.tasks, newTask],
-        config: {...prevState.config}
-      }
-    });
+    dispatch({ type: TaskActionTypes.START_TASK, payload: newTask })
   }
 
   function handleInterruptTask(e: MouseEvent) {
 
     e.preventDefault();
 
-    setTask(prevState => {
-
-      return {
-        ...prevState,
-        activeTask: null,
-        secondsRemaining: 0,
-        formattedSecondsRemaining: "00:00",
-        tasks: prevState.tasks.map(task => {
-
-          if(task.id == prevState.activeTask?.id) {
-            return {...task, interruptDate: Date.now()}
-          }
-
-          return task;
-        })
-      }
-    })
+    dispatch({ type: TaskActionTypes.INTERRUPT_TASK })
   }
 
   return (
@@ -88,11 +63,14 @@ export function FormHome() {
           value={taskName}
           onChange={e => setTaskName(e.target.value)}
           disabled={!!task.activeTask}
+          autoComplete='off'
         />
       </div>
 
       <div className={style.formRow}>
-        <p>Próximo intervalo é de {task.config[nextCycleType]} minutos</p>
+        <TipsForCycles 
+          nextCycleType={nextCycleType}
+        />
       </div>
 
       {task.currentCycle > 0 && (
@@ -103,28 +81,28 @@ export function FormHome() {
 
       <div className={style.formRow}>
         {!task.activeTask ? (
-          <ButtonDefault 
+          <ButtonDefault
             key={1}
-            color='green' 
+            color='green'
             aria-label='Iniciar tarefa'
             title='Iniciar tarefa'
             type='submit'
           >
-            <PlayCircleIcon/>
+            <PlayCircleIcon />
           </ButtonDefault>
-        ) : 
-        (
-          <ButtonDefault 
-            key={2}
-            color='red' 
-            aria-label='Interromper a tarefa'
-            title='Interromper tarefa'
-            type='button'
-            onClick={handleInterruptTask}
-          >
-            <StopCircleIcon />
-          </ButtonDefault>
-        )}
+        ) :
+          (
+            <ButtonDefault
+              key={2}
+              color='red'
+              aria-label='Interromper a tarefa'
+              title='Interromper tarefa'
+              type='button'
+              onClick={handleInterruptTask}
+            >
+              <StopCircleIcon />
+            </ButtonDefault>
+          )}
       </div>
     </form>
   );
