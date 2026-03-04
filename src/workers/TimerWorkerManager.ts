@@ -8,7 +8,6 @@ export class TimerWorkerManager {
 
     private constructor() {
         
-        console.log('Criou');
         this.worker = new Worker(new URL('./timerWorker.js', import.meta.url));
 
     }

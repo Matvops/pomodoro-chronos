@@ -40,6 +40,37 @@ export function taskReducer(state: TaskModelState, action: TaskActionType) {
             }
 
             break;
+        } 
+        case TaskActionTypes.COUNT_DOWN: {
+            
+            const secondsRemaining = action.payload.secondsRemaining;
+
+            state = {
+                ...state,
+                secondsRemaining: secondsRemaining,
+                formattedSecondsRemaining: parseSecondsToMinutes(secondsRemaining)
+            }
+
+            break;
+        }
+        case TaskActionTypes.COMPLETE_TASK: {
+            
+            state = {
+                ...state,
+                activeTask: null,
+                secondsRemaining: 0,
+                formattedSecondsRemaining: '00:00',
+                tasks: state.tasks.map(task => {
+
+                    if(task.id === state.activeTask?.id) {
+                        task = {...task, completeDate: Date.now()};
+                    } 
+
+                    return task;
+                })
+            }
+
+            break;
         }
     }
 
