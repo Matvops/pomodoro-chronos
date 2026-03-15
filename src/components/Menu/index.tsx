@@ -1,6 +1,7 @@
 import { HistoryIcon, HomeIcon, MoonIcon, SettingsIcon, SunIcon } from 'lucide-react';
 import style from './style.module.css';
 import { useEffect, useState, type MouseEvent } from 'react';
+import { Link } from 'react-router';
 
 type Themes = 'dark' | 'light';
 
@@ -30,7 +31,7 @@ export function Menu() {
   return (
     <>
       <nav className={style.menu}>
-        <a href="#" className={style.menuLink} aria-label='home' title='home'><HomeIcon /></a>
+        <Link to='/' className={style.menuLink} aria-label='home' title='home'><HomeIcon /></Link>
         <a href="#" className={style.menuLink} aria-label='history' title='history'><HistoryIcon /></a>
         <a href="#" className={style.menuLink} aria-label='settings' title='settings'><SettingsIcon /></a>
         <a href="#" className={style.menuLink} onClick={handleClick} aria-label='alther theme' title='alther theme'>
