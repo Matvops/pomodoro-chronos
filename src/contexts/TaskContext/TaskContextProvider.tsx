@@ -5,6 +5,7 @@ import { taskReducer } from "./taskReducer"
 import { TimerWorkerManager } from "../../workers/TimerWorkerManager"
 import { TaskActionTypes } from "./taskActions"
 import { loadBeep } from "../../utils/loadBeep"
+import { showMessage } from "../../adapters/showMessage"
 
 type TaskContextProviderProps = {
   children: React.ReactNode
@@ -24,6 +25,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
 
     if(countDownSeconds <= 0) {
       dispatch({ type: TaskActionTypes.COMPLETE_TASK })
+      showMessage.success('Ciclo completado');
       worker.terminate();
     } else {
       dispatch({ type: TaskActionTypes.COUNT_DOWN, payload: { secondsRemaining: countDownSeconds } })
