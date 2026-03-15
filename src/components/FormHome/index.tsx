@@ -10,6 +10,7 @@ import { getNextCycle } from '../../utils/getNextCycle';
 import { getNextCycleType } from '../../utils/getNextCycleType';
 import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
 import { TipsForCycles } from '../TipsForCycles';
+import { showMessage } from '../../adapters/showMessage';
 
 
 export function FormHome() {
@@ -22,13 +23,17 @@ export function FormHome() {
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    showMessage.dismiss();
 
-    if (!taskName) return;
+    if (!taskName) {
+      showMessage.warn('Digite a task');
+      return;
+    }
 
     const taskNameClean = taskName.trim();
 
     if (!taskNameClean) {
-      alert('Digite a task')
+      showMessage.warn('Digite a task');
       return;
     }
 
@@ -43,6 +48,7 @@ export function FormHome() {
     };
 
     dispatch({ type: TaskActionTypes.START_TASK, payload: newTask })
+    showMessage.success('Task Criada');
   }
 
   function handleInterruptTask(e: MouseEvent) {
@@ -50,6 +56,9 @@ export function FormHome() {
     e.preventDefault();
 
     dispatch({ type: TaskActionTypes.INTERRUPT_TASK })
+
+    showMessage.dismiss();
+    showMessage.info('Task Interrompida');
   }
 
   return (
