@@ -15,8 +15,9 @@ import { showMessage } from '../../adapters/showMessage';
 
 export function FormHome() {
 
-  const [taskName, setTaskName] = useState('');
+  const [taskName, setTaskName] = useState<string|undefined>('');
   const { task, dispatch } = useContext(TaskContext);
+  const lastTaskName = task.tasks.at(-1)?.name;
 
   const nextCycle = getNextCycle(task.currentCycle);
   const nextCycleType = getNextCycleType(nextCycle);
@@ -69,7 +70,7 @@ export function FormHome() {
           type='text'
           id='task'
           placeholder='Digite algo...'
-          value={taskName}
+          value={lastTaskName ?? taskName}
           onChange={e => setTaskName(e.target.value)}
           disabled={!!task.activeTask}
           autoComplete='off'
