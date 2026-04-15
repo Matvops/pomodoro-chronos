@@ -56,6 +56,12 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
 
   }, [task.activeTask]);
 
+  useEffect(() => {
+
+    document.title = task.secondsRemaining > 0 ? `${task.formattedSecondsRemaining} - Pomodoro` : 'Chronos Pomodoro';
+
+  }, [task]);
+
   return (
     <TaskContext.Provider value={{task, dispatch}}>
       {children}
