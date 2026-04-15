@@ -70,10 +70,11 @@ export function FormHome() {
           type='text'
           id='task'
           placeholder='Digite algo...'
-          value={lastTaskName ?? taskName}
+          value={taskName}
           onChange={e => setTaskName(e.target.value)}
           disabled={!!task.activeTask}
           autoComplete='off'
+          defaultValue={lastTaskName}
         />
       </div>
 
