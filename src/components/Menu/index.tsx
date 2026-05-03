@@ -32,7 +32,7 @@ export function Menu() {
     <>
       <nav className={style.menu}>
         <RouterLink path='/' className={style.menuLink} aria-label='home' title='home'><HomeIcon /></RouterLink>
-        <RouterLink path='/' className={style.menuLink} aria-label='history' title='history'><HistoryIcon /></RouterLink>
+        <RouterLink path='/history' className={style.menuLink} aria-label='history' title='history'><HistoryIcon /></RouterLink>
         <RouterLink path='/' className={style.menuLink} aria-label='settings' title='settings'><SettingsIcon /></RouterLink>
         <a href="#" className={style.menuLink} onClick={handleClick} aria-label='alther theme' title='alther theme'>
           {iconThemes[theme]}
