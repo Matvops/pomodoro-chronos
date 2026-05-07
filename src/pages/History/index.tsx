@@ -8,10 +8,13 @@ import { useContext } from "react";
 import { TaskContext } from "../../contexts/TaskContext";
 import { formatDate } from "../../utils/formatDate";
 import { getTaskStatus } from "../../utils/getTaskStatus";
+import { sortTasks } from "../../utils/sortTasks";
 
 export function History() {
 
   const { task } = useContext(TaskContext);
+
+  const sortedTasks = sortTasks({field: 'startDate', direction: 'desc', tasks: task.tasks});
 
   const tipo = {
     work: 'Foco',
@@ -46,7 +49,7 @@ export function History() {
                 </tr>
               </thead>
               <tbody>
-                {task.tasks.map((t) => {
+                {sortedTasks.map((t) => {
                   return (
                     <tr key={t.id} className={`${style.row} ${style.bodyRow}`}>
                       <td>{t.name}</td>
