@@ -27,7 +27,7 @@ export function AboutPomodoro() {
             </p>
 
 
-            <img src='https://placehold.co/1920x1080' alt='' />
+            <img src='public/images/pexels-polina-tankilevitch-8553892.jpg' alt='' />
 
             <h2>Como funciona o Pomodoro tradicional?</h2>
 
