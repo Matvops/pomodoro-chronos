@@ -79,6 +79,19 @@ export function taskReducer(state: TaskModelState, action: TaskActionType) {
 
             break;
         }
+        case TaskActionTypes.CHANGE_SETTINGS: {
+            
+            state = {
+                ...state,
+                config: {
+                    work: action.payload.workTime,
+                    rest: action.payload.rest,
+                    shortRest: action.payload.shortRest,
+                }
+            }
+
+            break;
+        }
     }
 
     return state;
