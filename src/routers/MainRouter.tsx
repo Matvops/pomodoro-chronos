@@ -4,6 +4,7 @@ import { AboutPomodoro } from "../pages/AboutPomodoro";
 import { NotFound } from "../pages/NotFound";
 import { useEffect } from "react";
 import { History } from "../pages/History";
+import { Settings } from "../pages/Settings";
 
 function ScrollToTop() {
 
@@ -39,6 +40,11 @@ export const MainRouter = () => {
         <Route
           path="/history"
           element={<History />}
+        />
+
+        <Route
+          path="/settings"
+          element={<Settings />}
         />
 
         <Route
