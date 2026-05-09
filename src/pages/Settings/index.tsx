@@ -5,7 +5,7 @@ import { Heading } from '../../components/Heading';
 import { InputDefault } from '../../components/InputDefault';
 import { MainTemplate } from '../../templates/MainTemplate';
 import style from './style.module.css';
-import { useContext, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { TaskContext } from '../../contexts/TaskContext';
 import { showMessage } from '../../adapters/showMessage';
 import { TaskActionTypes } from '../../contexts/TaskContext/taskActions';
@@ -15,9 +15,9 @@ export function Settings() {
 
   const { task, dispatch } = useContext(TaskContext);
 
-  const workTimeInput = useRef<HTMLInputElement>(null); 
-  const restInput = useRef<HTMLInputElement>(null); 
-  const shortRestInput = useRef<HTMLInputElement>(null); 
+  const workTimeInput = useRef<HTMLInputElement>(null);
+  const restInput = useRef<HTMLInputElement>(null);
+  const shortRestInput = useRef<HTMLInputElement>(null);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -27,25 +27,25 @@ export function Settings() {
     const shortRest = Number(shortRestInput.current?.value);
 
     showMessage.dismiss();
-    if(isNaN(workTime) || isNaN(rest) || isNaN(shortRest)) {
+    if (isNaN(workTime) || isNaN(rest) || isNaN(shortRest)) {
       showMessage.error('Por favor, use apenas números.');
       return;
     }
 
-    if(workTime < 1 || workTime > 90) {
+    if (workTime < 1 || workTime > 90) {
       showMessage.warning('Digite apenas valores entre 1 e 90 para foco');
     }
 
-    if(rest < 1 || rest > 60) {
+    if (rest < 1 || rest > 60) {
       showMessage.warning('Digite apenas valores entre 1 e 60 para Descanso');
     }
 
-    if(shortRest < 1 || shortRest > 30) {
+    if (shortRest < 1 || shortRest > 30) {
       showMessage.warning('Digite apenas valores entre 1 e 60 para Descanso Curto');
     }
 
     dispatch({
-      type: TaskActionTypes.CHANGE_SETTINGS, 
+      type: TaskActionTypes.CHANGE_SETTINGS,
       payload: {
         workTime: workTime,
         rest: rest,
@@ -56,7 +56,11 @@ export function Settings() {
     showMessage.success('Configurações salvas com sucesso.');
   }
 
- 
+
+
+  useEffect(() => {
+    document.title = 'Settings';
+  }, []);
 
   return (
     <MainTemplate>

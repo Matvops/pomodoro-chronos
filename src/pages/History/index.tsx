@@ -4,7 +4,7 @@ import { Container } from "../../components/Container";
 import { Heading } from "../../components/Heading";
 import { MainTemplate } from "../../templates/MainTemplate";
 import style from './style.module.css';
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { TaskContext } from "../../contexts/TaskContext";
 import { formatDate } from "../../utils/formatDate";
 import { getTaskStatus } from "../../utils/getTaskStatus";
@@ -34,6 +34,10 @@ export function History() {
     })
 
   }
+
+  useEffect(() => {
+    document.title = 'History';
+  }, []);
 
   return (
     <>
