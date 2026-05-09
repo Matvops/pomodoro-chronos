@@ -5,7 +5,8 @@ export enum TaskActionTypes {
     INTERRUPT_TASK = 'INTERRUPT_TASK',
     COUNT_DOWN = 'COUNT_DOWN',
     COMPLETE_TASK = 'COMPLETE_TASK',
-    RESET_TASK = 'RESET_TASK'
+    RESET_TASK = 'RESET_TASK',
+    CHANGE_SETTINGS = 'CHANGE_SETTINGS'
 };
 
 
@@ -21,4 +22,7 @@ export type TaskActionType = {
     type: TaskActionTypes.COMPLETE_TASK
 } | {
     type: TaskActionTypes.RESET_TASK
+} | {
+    type: TaskActionTypes.CHANGE_SETTINGS,
+    payload: { workTime: number, rest: number, shortRest: number }
 }
