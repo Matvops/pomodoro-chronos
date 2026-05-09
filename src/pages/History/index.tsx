@@ -10,6 +10,7 @@ import { formatDate } from "../../utils/formatDate";
 import { getTaskStatus } from "../../utils/getTaskStatus";
 import { sortTasks } from "../../utils/sortTasks";
 import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
+import { showMessage } from "../../adapters/showMessage";
 
 export function History() {
 
@@ -26,9 +27,12 @@ export function History() {
   }
 
   function handleResetHistory() {
-    if(!confirm('Tem certeza?')) return;
+    showMessage.dismiss();
+    showMessage.confirm('Tem certeza?', confirmation => {
+      if(confirmation) dispatch({type: TaskActionTypes.RESET_TASK});
+      return;
+    })
 
-    dispatch({type: TaskActionTypes.RESET_TASK});
   }
 
   return (
